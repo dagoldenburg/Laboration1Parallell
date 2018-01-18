@@ -5,6 +5,9 @@
  */
 package quicksort;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  *
  * @author Kraken
@@ -16,11 +19,25 @@ public class Quicksort {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int[] daArray = {1,2,5,9,10,6,355,55,65,1024,19,27,69,1337,1312,88};
+        Random rand = new Random();
+        int arrayLength = 1000000;
+        float[] daArray = new float[arrayLength];
         
+        for(int i = 0; i < arrayLength; i++){
+            daArray[i] = rand.nextFloat();
+        }
+
+        long startTime = System.currentTimeMillis();
         QuickSorter sorter = new QuickSorter();
         sorter.quicksort(daArray);
+        long finishTime = System.currentTimeMillis();
+        System.out.println("Our quicksort algo sort time with " + arrayLength + " length " + ": " + (finishTime-startTime));
         
+        
+        startTime = System.currentTimeMillis();
+        Arrays.parallelSort(daArray);
+        finishTime = System.currentTimeMillis();
+        System.out.println("Their quicksort algo sort time with " + arrayLength + " length " + ": " + (finishTime-startTime));
     }
     
 }

@@ -12,19 +12,19 @@ package quicksort;
 public class QuickSorter {
     
     
-    public  void quicksort(int[] array){
+    public  void quicksort(float[] array){
         quicksort(0,array.length-1,array);
-        for(int i = 0; i < array.length-1; i++){
-            System.out.print(array[i] + " ");
-        }
+      //  for(int i = 0; i < array.length-1; i++){
+        //    System.out.print(array[i] + " ");
+      //  }
     }
     
     
     
-    private void quicksort(int low, int high, int[] array){
+    private void quicksort(int low, int high, float[] array){
         int i = low, j = high;
         
-        int middle = array[low + (high-low)/2];
+        float middle = array[low + (high-low)/2];
         
         while(i <= j){
             while(array[i] < middle){
@@ -52,8 +52,8 @@ public class QuickSorter {
     
     
     
-    private void exchange(int[] array, int first, int second){
-        int temp = array[first];
+    private void exchange(float[] array, int first, int second){
+        float temp = array[first];
         array[first] = array[second];
         array[second] = temp;
     }
