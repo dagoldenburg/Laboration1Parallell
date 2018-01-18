@@ -7,8 +7,11 @@ import java.util.Random;
 public class TestClass {
 
     public static void main(String[] args){
-        
-        float[] arrayNumbers = new float[100000];
+        testMergeSort(100000);
+    }
+
+    private static void testMergeSort(int size){
+        float[] arrayNumbers = new float[size];
 
         Random rand = new Random();
 
@@ -21,6 +24,7 @@ public class TestClass {
 
         System.out.println("Is correctly sorted: " + checkIfCorrect(arrayNumbers));
     }
+
 
     private static boolean checkIfCorrect(float[] array){
         for(int i = 0,j=1;i<array.length-1;i++,j++){
