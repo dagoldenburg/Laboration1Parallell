@@ -3,20 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MergeSort;
+package Sorts;
 
 /**
  *
  * @author Kraken
  */
 public class QuickSorter {
+    private static long start;
+    private static long stop;
+
+    public static long getTime(){
+        return stop-start;
+    }
     
-    
-    public  void quicksort(float[] array){
+    public float[] quicksort(float[] array){
+        start = System.currentTimeMillis();
         quicksort(0,array.length-1,array);
-      //  for(int i = 0; i < array.length-1; i++){
-        //    System.out.print(array[i] + " ");
-      //  }
+        stop = System.currentTimeMillis();
+        return array;
     }
     
     

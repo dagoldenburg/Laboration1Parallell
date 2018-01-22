@@ -1,3 +1,5 @@
+package AndersExempel;
+
 import java.util.concurrent.RecursiveTask;
 
 class SumTask extends RecursiveTask<Long> {
