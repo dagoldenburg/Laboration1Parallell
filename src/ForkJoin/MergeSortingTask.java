@@ -26,9 +26,10 @@ public class MergeSortingTask extends RecursiveAction {
     @Override
     protected void compute(){
 
+        /**if subarray is less than 9000 then just compute in this task **/
         if((high-low) < 9000) {
             mergeSorter(arrayNumbers,low,high);
-        }else{
+        }else{ //ITS OVER 9000, fork new task(s)
             int middle = low + (high - low) / 2;
             MergeSortingTask worker1 = new MergeSortingTask( low, middle);
             MergeSortingTask worker2 = new MergeSortingTask( middle + 1, high);

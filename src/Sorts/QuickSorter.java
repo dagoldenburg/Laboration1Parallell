@@ -13,54 +13,60 @@ public class QuickSorter {
     private static long start;
     private static long stop;
 
+    private float[] daArray;
+
     public static long getTime(){
         return stop-start;
     }
     
     public float[] quicksort(float[] array){
+        if(array == null || array.length == 0){
+            return array;
+        }
+        daArray = array;
         start = System.currentTimeMillis();
-        quicksort(0,array.length-1,array);
+        quicksort(0,array.length-1);
         stop = System.currentTimeMillis();
         return array;
     }
     
     
     
-    private void quicksort(int low, int high, float[] array){
+    private void quicksort(int low, int high){
         int i = low, j = high;
         
-        float middle = array[low + (high-low)/2];
+        float middle = daArray[low + (high-low)/2];
         
         while(i <= j){
-            while(array[i] < middle){
+            while(daArray[i] < middle){
                 i++;
             }
-            while(array[j] > middle){
+            while(daArray[j] > middle){
                 j--;
             }
             
             if(i <= j){
-                exchange(array,i,j);
+                exchange(i,j);
                 i++;
                 j--;
             }
         }
         
         if(low < j){
-            quicksort(low, j, array);
+            quicksort(low, j);
         }
         if(i < high){
-            quicksort(i,high,array);
+            quicksort(i,high);
         }
     }
     
     
     
     
-    private void exchange(float[] array, int first, int second){
-        float temp = array[first];
-        array[first] = array[second];
-        array[second] = temp;
+    private void exchange(int first, int second){
+        float temp = daArray[first];
+        daArray[first] = daArray[second];
+        daArray[second] = temp;
     }
     
 }

@@ -15,7 +15,7 @@ import java.util.concurrent.RecursiveAction;
  */
 public class QuickSorterTask extends RecursiveAction{
 
-    private static float[] array;
+    private float[] array;
     private int low,high;
 
     public QuickSorterTask(int low, int high,float[] array) {
@@ -24,15 +24,17 @@ public class QuickSorterTask extends RecursiveAction{
         this.high = high;
     }
 
-    public static void setArray(float[] array) {
-        QuickSorterTask.array = array;
-    }
+  //  public static void setArray(float[] array) {
+  //      QuickSorterTask.array = array;
+  //  }
 
     @Override
     protected void compute(){
         int i = low, j = high;
         float middle = array[low + (high-low)/2];
 
+        /**first exchange any elements that are in the wrong place **/
+        /** (if element from left subarray is larger than element from right subarray **/
         while(i <= j){
             while(array[i] < middle){
                 i++;
@@ -42,22 +44,25 @@ public class QuickSorterTask extends RecursiveAction{
             }
 
             if(i <= j){
-                exchange(array,i,j);
+                exchange(i,j);
                 i++;
                 j--;
             }
         }
-        if((high-low) < 9000) {
+
+
+        /** if subarray is less than x elements then dont fork just compute **/
+        if((high-low) < 5000) {
             if(low < j){
-                quicksort(low, j, array);
+                quicksort(low, j);
             }
             if(i < high){
-                quicksort(i,high,array);
+                quicksort(i,high);
             }
-        }else{
+        }else{ //fork to new tasks
             boolean fork = false;
-            QuickSorterTask worker1 = new QuickSorterTask(low, j, array);
-            QuickSorterTask worker2 = new QuickSorterTask(i, high, array);
+            QuickSorterTask worker1 = new QuickSorterTask(low, j,array);
+            QuickSorterTask worker2 = new QuickSorterTask(i, high,array);
             if (low < j) {
                 worker1.fork();
                 fork = true;
@@ -71,7 +76,7 @@ public class QuickSorterTask extends RecursiveAction{
         }
     }
 
-    private void quicksort(int low, int high, float[] array){
+    private void quicksort(int low, int high){
         int i = low, j = high;
 
         float middle = array[low + (high-low)/2];
@@ -85,21 +90,21 @@ public class QuickSorterTask extends RecursiveAction{
             }
 
             if(i <= j){
-                exchange(array,i,j);
+                exchange(i,j);
                 i++;
                 j--;
             }
         }
 
         if(low < j){
-            quicksort(low, j, array);
+            quicksort(low, j);
         }
         if(i < high){
-            quicksort(i,high,array);
+            quicksort(i,high);
         }
     }
 
-    private void exchange(float[] array, int first, int second){
+    private void exchange(int first, int second){
         float temp = array[first];
         array[first] = array[second];
         array[second] = temp;
