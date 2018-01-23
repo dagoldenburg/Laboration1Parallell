@@ -4,6 +4,7 @@ import ForkJoin.MergeSortingTask;
 import ForkJoin.QuickSorterTask;
 import Sorts.MergeSorter;
 import Sorts.QuickSorter;
+import com.sun.scenario.effect.Merge;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -11,7 +12,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class TestClass {
 
-    private static int SIZE = (int) 1E7,MAXCORES = 1;
+    private static int SIZE = (int) 1E6,MAXCORES = 4;
     private static Random rand;
 
     public static void main(String[] args){
@@ -33,6 +34,7 @@ public class TestClass {
             ForkJoinPool pool = new ForkJoinPool(MAXCORES);
             MergeSortingTask.setArrayNumbers(dummyArray.clone());
             MergeSortingTask.setHelper(new float[dummyArray.length]);
+            MergeSortingTask.setThreshold(9000);
             MergeSortingTask rootTaskWarmUp = new MergeSortingTask(0,dummyArray.length-1);
             pool.invoke(rootTaskWarmUp);
 
@@ -145,15 +147,7 @@ public class TestClass {
             long totalTime = 0;
             int nrTries = 20;
             for (int k = 0; k < nrTries; k++) {//get average out of nrTries tries
-                ForkJoinPool pool = new ForkJoinPool(MAXCORES);
-                MergeSortingTask.setArrayNumbers(daArray);
-                MergeSortingTask.setHelper(new float[daArray.length]);
-                MergeSortingTask.setThreshold(threshold);
-                long start = System.currentTimeMillis();
-                MergeSortingTask rootTask = new MergeSortingTask(0, daArray.length - 1);
-                pool.invoke(rootTask);
-                long stop = System.currentTimeMillis();
-                totalTime += (stop - start);
+                totalTime += executeMergeSortForkJoin(daArray.clone(),MAXCORES,threshold);
             }
             double avg = totalTime / nrTries;
             if (avg < lowestAvg) {
@@ -164,28 +158,45 @@ public class TestClass {
         }
         //use bestThreshold for next step of the test
         System.out.println("Best threshold: " + bestThreshold);
-
+        System.out.println();
 
         for(int nrCores = 1; nrCores <= MAXCORES; nrCores++){//test 1 to MAXCORES
-            for(int k = 0; k < 20; k++){//do 20 tests
+            System.out.println("Testing sort with " + nrCores + " cores");
+            long totalTime = 0;
+            int nrTries = 20;
+            for(int k = 0; k < nrTries; k++){//do 20 tests and calculate average
+
+                totalTime += executeMergeSortForkJoin(daArray.clone(),nrCores,bestThreshold);
 
             }
+            double avg = totalTime/nrTries;
+            System.out.println("Average sort time: " + avg + " ms.");
+            System.out.println();
         }
-
-        ForkJoinPool pool = new ForkJoinPool(MAXCORES);
-        MergeSortingTask.setArrayNumbers(daArray);
-        MergeSortingTask.setHelper(new float[daArray.length]);
-        long start = System.currentTimeMillis();
-        MergeSortingTask rootTask = new MergeSortingTask(0,daArray.length-1);
-        pool.invoke(rootTask);
-        long stop = System.currentTimeMillis();
-        System.out.println("Merge Sort - ForkJoin: " + daArray.length + " length " + ": " + (stop-start) + " ms");
-
-        System.out.println("Is correctly sorted: " + checkIfCorrect(daArray));
         System.out.println();
         System.out.println();
     }
 
+    private static long executeMergeSortForkJoin(float[] newArray, int nrCores, int threshold){
+        long totalTime = 0;
+
+        ForkJoinPool pool = new ForkJoinPool(nrCores);
+        MergeSortingTask.setArrayNumbers(newArray);
+        MergeSortingTask.setHelper(new float[newArray.length]);
+        MergeSortingTask.setThreshold(threshold);
+        long start = System.currentTimeMillis();
+        MergeSortingTask rootTask = new MergeSortingTask(0,newArray.length-1);
+        pool.invoke(rootTask);
+        long stop = System.currentTimeMillis();
+        totalTime += (stop-start);
+
+        if(!checkIfCorrect(newArray)){
+            System.out.println("DID NOT SORT CORRECTLY - ABORT MISSION");
+            System.exit(1);
+        }
+        System.gc();
+        return totalTime;
+    }
 
     /**
      * Test of our implementation of quick sort fork join
