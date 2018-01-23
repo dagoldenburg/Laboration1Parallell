@@ -216,13 +216,24 @@ public class TestClass {
         }
         //use bestThreshold for next step of the test
         System.out.println("Best threshold: " + bestThreshold);
-
+        System.out.println();
 
         for(int nrCores = 1; nrCores <= MAXCORES; nrCores++){//test 1 to MAXCORES
-            for(int k = 0; k < 20; k++){//do 20 tests
+            System.out.println("Testing sort with " + nrCores + " cores");
+            long totalTime = 0;
+            int nrTries = 20;
+            for(int k = 0; k < nrTries; k++){//do 20 tests and calculate average
+
+                totalTime += executeMergeSortForkJoin(daArray.clone(),nrCores,bestThreshold);
 
             }
-        }*/
+            double avg = totalTime/nrTries;
+            System.out.println("Average sort time: " + avg + " ms.");
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }*/
 
         ForkJoinPool pool = new ForkJoinPool(MAXCORES);
         MergeSortingTask.setArrayNumbers(daArray);
@@ -238,7 +249,6 @@ public class TestClass {
         //System.out.println();
     }
 
-
     /**
      * Test of our implementation of quick sort fork join
      * @param daArray
@@ -250,6 +260,7 @@ public class TestClass {
         System.gc();
 
         ForkJoinPool pool = new ForkJoinPool(MAXCORES);
+        long start = System.currentTimeMillis();
        // QuickSorterTask.setArray(daArray);
         QuickSorterTask rootTask = new QuickSorterTask(0,daArray.length-1,daArray,threshold);
         long start = System.currentTimeMillis();
