@@ -11,7 +11,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class TestClass {
 
-    private static int SIZE = (int) 1E7,MAXCORES = 1;
+    private static int SIZE = (int) 1E7,MAXCORES = 1,QUICK_SORT = 1,MERGE_SORT = 2;
     private static Random rand;
 
     public static void main(String[] args){
@@ -59,6 +59,20 @@ public class TestClass {
         testMergeSortForkJoin((float[]) daArray.clone());
         testQuickSortForkJoin((float[]) daArray.clone());
 
+    }
+    //whatSort 1 = quick 2 =
+    private void testThreshold(int whatSort,int fromRange, int toRange, int increase,int testPerThreshold,float[] daArray){
+        for(int i = fromRange;i<toRange;i+=increase){
+            for(int j = 0;i<testPerThreshold;j++){
+                switch(whatSort){
+                    case 1: testQuickSortForkJoin(daArray);break;
+                    case 2: testMergeSortForkJoin(daArray);break;
+                    default:
+                        System.out.println("whatSort needs to be 1 or 2");
+                        return;
+                }
+            }
+        }
     }
 
 

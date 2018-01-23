@@ -16,12 +16,13 @@ import java.util.concurrent.RecursiveAction;
 public class QuickSorterTask extends RecursiveAction{
 
     private float[] array;
-    private int low,high;
+    private int low,high,threshold;
 
-    public QuickSorterTask(int low, int high,float[] array) {
+    public QuickSorterTask(int low, int high,float[] array,int threshold) {
         this.array = array;
         this.low = low;
         this.high = high;
+        this.threshold = threshold;
     }
 
   //  public static void setArray(float[] array) {
@@ -52,7 +53,7 @@ public class QuickSorterTask extends RecursiveAction{
 
 
         /** if subarray is less than x elements then dont fork just compute **/
-        if((high-low) < 5000) {
+        if((high-low) < threshold) {
             if(low < j){
                 quicksort(low, j);
             }
