@@ -11,7 +11,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class TestClass {
 
-    private static int SIZE = (int) 1E7,CORES = 1;
+    private static int SIZE = (int) 1E7,MAXCORES = 1;
     private static Random rand;
 
     public static void main(String[] args){
@@ -26,11 +26,11 @@ public class TestClass {
         }
         for(int i = 0; i < 1000; i++){
             Arrays.sort(dummyArray.clone());
-            new QuickSorter().quicksort(dummyArray.clone());
+            //new QuickSorter().quicksort(dummyArray.clone());
             Arrays.parallelSort(dummyArray.clone());
-            new MergeSorter().mergeSorter(dummyArray.clone());
+            //new MergeSorter().mergeSorter(dummyArray.clone());
 
-            ForkJoinPool pool = new ForkJoinPool(CORES);
+            ForkJoinPool pool = new ForkJoinPool(MAXCORES);
             MergeSortingTask.setArrayNumbers(dummyArray.clone());
             MergeSortingTask.setHelper(new float[dummyArray.length]);
             MergeSortingTask rootTaskWarmUp = new MergeSortingTask(0,dummyArray.length-1);
@@ -52,9 +52,9 @@ public class TestClass {
             daArray[i] = rand.nextFloat();
         }
 
-        testArraysSort((float[]) daArray.clone());
-        testQuickSort((float[]) daArray.clone());
-        testMergeSort((float[]) daArray.clone());
+        //testArraysSort((float[]) daArray.clone());
+       /// testQuickSort((float[]) daArray.clone());
+       // testMergeSort((float[]) daArray.clone());
         testArraysParallelSort((float[]) daArray.clone());
         testMergeSortForkJoin((float[]) daArray.clone());
         testQuickSortForkJoin((float[]) daArray.clone());
@@ -132,10 +132,47 @@ public class TestClass {
      */
     private static void testMergeSortForkJoin(float[] daArray){
         System.out.println("------ Merge sort - ForkJoin ------");
-
         System.gc();
 
-        ForkJoinPool pool = new ForkJoinPool(CORES);
+
+        //find threshold
+        System.out.println("Searching for best threshold");
+        int threshold = 500;
+        int incrementVal = 500;
+        double lowestAvg = Double.MAX_VALUE;
+        int bestThreshold = 0;
+        for(int i = 0; i < 20; i++) {//do tests with 20 different threshold vals
+            long totalTime = 0;
+            int nrTries = 20;
+            for (int k = 0; k < nrTries; k++) {//get average out of nrTries tries
+                ForkJoinPool pool = new ForkJoinPool(MAXCORES);
+                MergeSortingTask.setArrayNumbers(daArray);
+                MergeSortingTask.setHelper(new float[daArray.length]);
+                MergeSortingTask.setThreshold(threshold);
+                long start = System.currentTimeMillis();
+                MergeSortingTask rootTask = new MergeSortingTask(0, daArray.length - 1);
+                pool.invoke(rootTask);
+                long stop = System.currentTimeMillis();
+                totalTime += (stop - start);
+            }
+            double avg = totalTime / nrTries;
+            if (avg < lowestAvg) {
+                lowestAvg = avg;
+                bestThreshold = threshold;
+            }
+            threshold += incrementVal; //increment threshold for next loop
+        }
+        //use bestThreshold for next step of the test
+        System.out.println("Best threshold: " + bestThreshold);
+
+
+        for(int nrCores = 1; nrCores <= MAXCORES; nrCores++){//test 1 to MAXCORES
+            for(int k = 0; k < 20; k++){//do 20 tests
+
+            }
+        }
+
+        ForkJoinPool pool = new ForkJoinPool(MAXCORES);
         MergeSortingTask.setArrayNumbers(daArray);
         MergeSortingTask.setHelper(new float[daArray.length]);
         long start = System.currentTimeMillis();
@@ -159,7 +196,7 @@ public class TestClass {
 
         System.gc();
 
-        ForkJoinPool pool = new ForkJoinPool(CORES);
+        ForkJoinPool pool = new ForkJoinPool(MAXCORES);
         long start = System.currentTimeMillis();
        // QuickSorterTask.setArray(daArray);
         QuickSorterTask rootTask = new QuickSorterTask(0,daArray.length-1,daArray);

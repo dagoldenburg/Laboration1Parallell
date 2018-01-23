@@ -8,6 +8,7 @@ public class MergeSortingTask extends RecursiveAction {
 
     private int low,high;
     private static float[] arrayNumbers,helper;
+    private static int threshold;
 
     public static void setArrayNumbers(float[] arrayNumbers) {
         MergeSortingTask.arrayNumbers = arrayNumbers;
@@ -17,6 +18,9 @@ public class MergeSortingTask extends RecursiveAction {
         MergeSortingTask.helper = helper;
     }
 
+    public static void setThreshold(int threshold){
+        MergeSortingTask.threshold = threshold;
+    }
     public MergeSortingTask(int low, int high){
         this.low = low;
         this.high = high;
@@ -26,8 +30,8 @@ public class MergeSortingTask extends RecursiveAction {
     @Override
     protected void compute(){
 
-        /**if subarray is less than 9000 then just compute in this task **/
-        if((high-low) < 9000) {
+        /**if subarray is less than threshold then just compute in this task **/
+        if((high-low) < threshold) {
             mergeSorter(arrayNumbers,low,high);
         }else{ //ITS OVER 9000, fork new task(s)
             int middle = low + (high - low) / 2;
