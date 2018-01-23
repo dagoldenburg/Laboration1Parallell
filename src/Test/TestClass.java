@@ -12,7 +12,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class TestClass {
 
-    private static int SIZE = (int) 1E6,MAXCORES = 4;
+    private static int SIZE = (int) 1E7,MAXCORES = 4;
     private static Random rand;
 
     public static void main(String[] args){
@@ -134,6 +134,7 @@ public class TestClass {
      */
     private static void testMergeSortForkJoin(float[] daArray){
         System.out.println("------ Merge sort - ForkJoin ------");
+        long startOfTest = System.currentTimeMillis();
         System.gc();
 
 
@@ -173,6 +174,7 @@ public class TestClass {
             System.out.println("Average sort time: " + avg + " ms.");
             System.out.println();
         }
+        System.out.println("Test took: " + (System.currentTimeMillis() - startOfTest) + " ms");
         System.out.println();
         System.out.println();
     }
