@@ -260,13 +260,10 @@ public class TestClass {
         System.gc();
 
         ForkJoinPool pool = new ForkJoinPool(MAXCORES);
-        long start = System.currentTimeMillis();
-       // QuickSorterTask.setArray(daArray);
         QuickSorterTask rootTask = new QuickSorterTask(0,daArray.length-1,daArray,threshold);
         long start = System.currentTimeMillis();
         pool.invoke(rootTask);
         long stop = System.currentTimeMillis();
-        timeArray.add(stop-start);
         //System.out.println("Quick Sort - ForkJoin: " + daArray.length + " length " + ": " + (stop-start) + " ms");
 
         //System.out.println("Is correctly sorted: " + checkIfCorrect(daArray));

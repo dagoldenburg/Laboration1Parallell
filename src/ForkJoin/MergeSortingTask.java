@@ -17,8 +17,7 @@ public class MergeSortingTask extends RecursiveAction {
     public static void setHelper(float[] helper) {
         MergeSortingTask.helper = helper;
     }
-
-
+    
     public MergeSortingTask(int low, int high,int thres){
         this.low = low;
         this.high = high;
