@@ -16,9 +16,17 @@ import java.util.concurrent.RecursiveAction;
 public class QuickSorterTask extends RecursiveAction{
 
     private float[] array;
-    private int low,high,threshold;
+    private int low,high;
+    private static int threshold;
 
     public QuickSorterTask(int low, int high,float[] array,int threshold) {
+        this.array = array;
+        this.low = low;
+        this.high = high;
+        QuickSorterTask.threshold = threshold;
+    }
+
+    public QuickSorterTask(int low, int high,float[] array) {
         this.array = array;
         this.low = low;
         this.high = high;

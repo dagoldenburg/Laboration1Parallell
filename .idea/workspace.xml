@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de0ae220-6ef0-4fb8-8f97-9a303856414d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Laboration1Parallell/ForkJoin/QuickSorterTask.class" afterPath="$PROJECT_DIR$/out/production/Laboration1Parallell/ForkJoin/QuickSorterTask.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Laboration1Parallell/Test/TestClass.class" afterPath="$PROJECT_DIR$/out/production/Laboration1Parallell/Test/TestClass.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java" afterPath="$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java" afterPath="$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test/TestClass.java" afterPath="$PROJECT_DIR$/src/Test/TestClass.java" />
     </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +22,8 @@
       <file leaf-file-name="QuickSorterTask.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="24" column="35" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            <state relative-caret-position="974">
+              <caret line="73" column="71" lean-forward="false" selection-start-line="73" selection-start-column="71" selection-end-line="73" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -45,11 +52,13 @@
       <file leaf-file-name="MergeSortingTask.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="289">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
-                <element signature="e#540#541#0" expanded="true" />
-                <element signature="e#594#595#0" expanded="true" />
+                <element signature="e#327#328#0" expanded="true" />
+                <element signature="e#387#388#0" expanded="true" />
+                <element signature="e#439#440#0" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +87,8 @@
       <file leaf-file-name="TestClass.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Test/TestClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+            <state relative-caret-position="405">
+              <caret line="99" column="100" lean-forward="false" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -95,11 +104,25 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java" />
+        <option value="$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java" />
+        <option value="$PROJECT_DIR$/src/Test/TestClass.java" />
+      </list>
+    </option>
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-4" />
+    <option name="width" value="1244" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -116,9 +139,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,8 +185,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -179,7 +206,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Unnamed">
     <configuration name="Unnamed" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Test.TestClass" />
@@ -281,13 +308,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f0a70dce-5f4a-4545-b8b9-717389b0b07f" name="Default" comment="" />
+      <changelist id="de0ae220-6ef0-4fb8-8f97-9a303856414d" name="Default" comment="" />
       <created>1516703748579</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516703748579</updated>
       <workItem from="1516703749738" duration="7592000" />
       <workItem from="1516717115076" duration="1213000" />
+      <workItem from="1516718467506" duration="4534000" />
     </task>
     <task id="LOCAL-00001" summary="threshold testing">
       <created>1516718240587</created>
@@ -296,28 +324,37 @@
       <option name="project" value="LOCAL" />
       <updated>1516718240587</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'master' of https://github.com/dagoldenburg/Laboration1Parallell&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Test/TestClass.java">
+      <created>1516720249946</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1516720249946</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8805000" />
+    <option name="totallyTimeSpent" value="13339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3462783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.725832" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16481775" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2532943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22767204" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -329,7 +366,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -342,13 +378,75 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="threshold testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="threshold testing" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/dagoldenburg/Laboration1Parallell&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Test/TestClass.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/dagoldenburg/Laboration1Parallell&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Test/TestClass.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="35" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AndersExempel/ForkJoinMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AndersExempel/SumTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="52" lean-forward="false" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+          <folding>
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sorts/MergeSorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Sorts/QuickSorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="48" column="25" lean-forward="false" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -378,8 +476,10 @@
         <state relative-caret-position="459">
           <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
           <folding>
-            <element signature="e#540#541#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -440,29 +540,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java">
+    <entry file="file://$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-          <folding>
-            <element signature="e#540#541#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="974">
+          <caret line="73" column="71" lean-forward="false" selection-start-line="73" selection-start-column="71" selection-end-line="73" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ForkJoin/QuickSorterTask.java">
+    <entry file="file://$PROJECT_DIR$/src/ForkJoin/MergeSortingTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="24" column="35" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="289">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state relative-caret-position="405">
+          <caret line="99" column="100" lean-forward="false" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
           <folding />
         </state>
       </provider>

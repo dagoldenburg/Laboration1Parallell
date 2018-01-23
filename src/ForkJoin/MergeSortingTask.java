@@ -18,13 +18,16 @@ public class MergeSortingTask extends RecursiveAction {
         MergeSortingTask.helper = helper;
     }
 
-    public static void setThreshold(int threshold){
-        MergeSortingTask.threshold = threshold;
-    }
-    public MergeSortingTask(int low, int high){
+
+    public MergeSortingTask(int low, int high,int thres){
         this.low = low;
         this.high = high;
+        threshold = thres;
+    }
 
+    private MergeSortingTask(int low, int high){
+        this.low = low;
+        this.high = high;
     }
 
     @Override
