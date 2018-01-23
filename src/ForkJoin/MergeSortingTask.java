@@ -10,18 +10,12 @@ public class MergeSortingTask extends RecursiveAction {
     private static float[] arrayNumbers,helper;
     private static int threshold;
 
-    public static void setArrayNumbers(float[] arrayNumbers) {
-        MergeSortingTask.arrayNumbers = arrayNumbers;
-    }
-
-    public static void setHelper(float[] helper) {
-        MergeSortingTask.helper = helper;
-    }
-    
-    public MergeSortingTask(int low, int high,int thres){
+    public MergeSortingTask(int low, int high,float[] arr,int thres){
         this.low = low;
         this.high = high;
         threshold = thres;
+        MergeSortingTask.arrayNumbers = arr;
+        helper = new float[arr.length];
     }
 
     private MergeSortingTask(int low, int high){
