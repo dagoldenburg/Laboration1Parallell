@@ -1,23 +1,28 @@
 package Test;
 
 import ForkJoin.MergeSortingTask;
+import ForkJoin.MergeSortingTaskStatic;
 import ForkJoin.QuickSorterTask;
 import Sorts.MergeSorter;
 import Sorts.QuickSorter;
 import com.sun.scenario.effect.Merge;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
 
 public class TestClass {
 
-    private static int SIZE = (int) 1E7,MAXCORES = 4;
+    private static int SIZE = (int) 1E6,MAXCORES = 8,QUICK_SORT = 1,MERGE_SORT = 2;
     private static Random rand;
+    private static ArrayList<Long> timeArray = new ArrayList<>();
 
     public static void main(String[] args){
         rand = new Random();
 
+        System.out.println("available cores: " + Runtime.getRuntime().availableProcessors());
         System.out.println("Beginning warmup phase");
         /** WARM UP CODE (JIT-compilation) **/
         int x = 10000; //just create a small array
@@ -27,19 +32,11 @@ public class TestClass {
         }
         for(int i = 0; i < 1000; i++){
             Arrays.sort(dummyArray.clone());
-            //new QuickSorter().quicksort(dummyArray.clone());
             Arrays.parallelSort(dummyArray.clone());
-            //new MergeSorter().mergeSorter(dummyArray.clone());
-
             ForkJoinPool pool = new ForkJoinPool(MAXCORES);
-            MergeSortingTask.setArrayNumbers(dummyArray.clone());
-            MergeSortingTask.setHelper(new float[dummyArray.length]);
-            MergeSortingTask.setThreshold(9000);
-            MergeSortingTask rootTaskWarmUp = new MergeSortingTask(0,dummyArray.length-1);
+            MergeSortingTask rootTaskWarmUp = new MergeSortingTask(0,dummyArray.length-1,dummyArray.clone(),9000);
             pool.invoke(rootTaskWarmUp);
-
-           // QuickSorterTask.setArray(dummyArray.clone());
-            QuickSorterTask quickRootTaskWarmUp = new QuickSorterTask(0,dummyArray.length-1,dummyArray.clone());
+            QuickSorterTask quickRootTaskWarmUp = new QuickSorterTask(0,dummyArray.length-1,dummyArray.clone(),9000);
             pool.invoke(quickRootTaskWarmUp);
         }
         /** END OF WARMUP PHASE **/
@@ -54,14 +51,12 @@ public class TestClass {
             daArray[i] = rand.nextFloat();
         }
 
-        //testArraysSort((float[]) daArray.clone());
-       /// testQuickSort((float[]) daArray.clone());
-       // testMergeSort((float[]) daArray.clone());
+        testArraysSort((float[]) daArray.clone());
         testArraysParallelSort((float[]) daArray.clone());
-        testMergeSortForkJoin((float[]) daArray.clone());
-        testQuickSortForkJoin((float[]) daArray.clone());
-
+        testForkJoinSort(MERGE_SORT,daArray.clone());
+        testForkJoinSort(QUICK_SORT, daArray.clone());
     }
+
 
 
     /**
@@ -76,22 +71,6 @@ public class TestClass {
         System.out.println("Total time to sort: " + (stop-start) + " ms.");
         System.out.println();
         System.out.println();
-    }
-
-    /**
-     * Test of our implementation of regular quick sort
-     * @param daArray
-     */
-    private static void testQuickSort(float[] daArray){
-        System.out.println("------ Our quick sort -------");
-
-        new QuickSorter().quicksort(daArray);
-        System.out.println("Our quicksort algo sort time with " + SIZE + " length " + ": " + QuickSorter.getTime() + " ms");
-
-        System.out.println("Is correctly sorted: "+checkIfCorrect(daArray));
-        System.out.println();
-        System.out.println();
-
     }
 
 
@@ -111,118 +90,108 @@ public class TestClass {
         System.out.println();
     }
 
-
-    /**
-     * Test of our implementation of merge sort
-     * @param daArray
-     */
-    private static void testMergeSort(float[] daArray){
-        System.out.println("------ Our Merge sort ------");
-
-        new MergeSorter().mergeSorter(daArray);
-        System.out.println("Merge Sort " + SIZE + " length " + ": " + MergeSorter.getTime() + " ms");
-
-        System.out.println("Is correctly sorted: " + checkIfCorrect(daArray));
-        System.out.println();
-        System.out.println();
-    }
-
-
     /**
      * Test of our implementation of merge sort fork join
      * @param daArray
      */
-    private static void testMergeSortForkJoin(float[] daArray){
-        System.out.println("------ Merge sort - ForkJoin ------");
-        long startOfTest = System.currentTimeMillis();
-        System.gc();
+
+    private static long executeSort(int whatSort,float[] daArray, int threshold,int cores){
+
+        if(whatSort == QUICK_SORT){
+
+            ForkJoinPool pool = new ForkJoinPool(cores);
+            QuickSorterTask rootTask = new QuickSorterTask(0,daArray.length-1,daArray,threshold);
+            long start = System.currentTimeMillis();
+            pool.invoke(rootTask);
+            long stop = System.currentTimeMillis();
+            if(!checkIfCorrect(daArray)){
+                System.out.println("didnt sort correctly m8");
+            }
+            //System.out.println("Time for " + cores + " cores and " + threshold + "threshold: " + (stop-start));
+            return (stop-start);
+
+        }else if(whatSort == MERGE_SORT){
+            ForkJoinPool pool = new ForkJoinPool(cores);
+            MergeSortingTask rootTask = new MergeSortingTask(0, daArray.length - 1,daArray,threshold);
 
 
-        //find threshold
-        System.out.println("Searching for best threshold");
-        int threshold = 500;
-        int incrementVal = 500;
+            long start = System.currentTimeMillis();
+            pool.invoke(rootTask);
+            long stop = System.currentTimeMillis();
+
+            if(!checkIfCorrect(daArray)){
+                System.out.println("didnt sort correctly m8");
+            }
+            return (stop-start);
+        }else{
+            return 0;
+        }
+    }
+
+    private static int getBestThreshold(int whatSort, float[] daArray){
+        int threshold = 1000;
+        int incrementVal = 1000;
         double lowestAvg = Double.MAX_VALUE;
         int bestThreshold = 0;
-        for(int i = 0; i < 20; i++) {//do tests with 20 different threshold vals
+        for(int i = 0; i < 10; i++) {//do tests with 10 different threshold vals
             long totalTime = 0;
             int nrTries = 20;
             for (int k = 0; k < nrTries; k++) {//get average out of nrTries tries
-                totalTime += executeMergeSortForkJoin(daArray.clone(),MAXCORES,threshold);
+                System.gc();
+                if(whatSort == MERGE_SORT){
+                    totalTime += executeSort(MERGE_SORT,daArray.clone(),threshold,MAXCORES);
+                }else if(whatSort == QUICK_SORT){
+                    totalTime += executeSort(QUICK_SORT,daArray.clone(),threshold,MAXCORES);
+                }
+
             }
             double avg = totalTime / nrTries;
+            System.out.println("Avg time for threshold " + threshold + ": " + avg + " ms.");
             if (avg < lowestAvg) {
                 lowestAvg = avg;
                 bestThreshold = threshold;
             }
             threshold += incrementVal; //increment threshold for next loop
         }
+        return bestThreshold;
+    }
+
+    private static void testForkJoinSort(int whatSort,float[] daArray){
+        if(whatSort == MERGE_SORT){
+            System.out.println("------ Merge Sort - ForkJoin -------");
+        }else if(whatSort == QUICK_SORT){
+            System.out.println("------ Quick Sort - ForkJoin -------");
+        }else{
+            System.out.println("Invalid sorting algorithm");
+            return;
+        }
+        //find threshold
+        System.out.println("Searching for best threshold");
+
+        int bestThreshold = getBestThreshold(whatSort,daArray);
+
         //use bestThreshold for next step of the test
         System.out.println("Best threshold: " + bestThreshold);
         System.out.println();
 
         for(int nrCores = 1; nrCores <= MAXCORES; nrCores++){//test 1 to MAXCORES
-            System.out.println("Testing sort with " + nrCores + " cores");
             long totalTime = 0;
             int nrTries = 20;
             for(int k = 0; k < nrTries; k++){//do 20 tests and calculate average
-
-                totalTime += executeMergeSortForkJoin(daArray.clone(),nrCores,bestThreshold);
-
+                if(whatSort == MERGE_SORT){
+                    totalTime += executeSort(MERGE_SORT,daArray.clone(),bestThreshold,nrCores);
+                }else if(whatSort == QUICK_SORT) {
+                    totalTime += executeSort(QUICK_SORT, daArray.clone(), bestThreshold, nrCores);
+                }
             }
             double avg = totalTime/nrTries;
-            System.out.println("Average sort time: " + avg + " ms.");
+            System.out.println("Avg sort time with " + nrCores + " cores: " + avg + " ms.");
             System.out.println();
         }
-        System.out.println("Test took: " + (System.currentTimeMillis() - startOfTest) + " ms");
         System.out.println();
         System.out.println();
     }
 
-    private static long executeMergeSortForkJoin(float[] newArray, int nrCores, int threshold){
-        long totalTime = 0;
-
-        ForkJoinPool pool = new ForkJoinPool(nrCores);
-        MergeSortingTask.setArrayNumbers(newArray);
-        MergeSortingTask.setHelper(new float[newArray.length]);
-        MergeSortingTask.setThreshold(threshold);
-        long start = System.currentTimeMillis();
-        MergeSortingTask rootTask = new MergeSortingTask(0,newArray.length-1);
-        pool.invoke(rootTask);
-        long stop = System.currentTimeMillis();
-        totalTime += (stop-start);
-
-        if(!checkIfCorrect(newArray)){
-            System.out.println("DID NOT SORT CORRECTLY - ABORT MISSION");
-            System.exit(1);
-        }
-        System.gc();
-        return totalTime;
-    }
-
-    /**
-     * Test of our implementation of quick sort fork join
-     * @param daArray
-     */
-    private static void testQuickSortForkJoin(float[] daArray){
-        System.out.println("------ Quick sort - ForkJoin ------");
-
-        System.gc();
-
-        ForkJoinPool pool = new ForkJoinPool(MAXCORES);
-        long start = System.currentTimeMillis();
-       // QuickSorterTask.setArray(daArray);
-        QuickSorterTask rootTask = new QuickSorterTask(0,daArray.length-1,daArray);
-        pool.invoke(rootTask);
-        long stop = System.currentTimeMillis();
-        System.out.println("Quick Sort - ForkJoin: " + daArray.length + " length " + ": " + (stop-start) + " ms");
-
-        System.out.println("Is correctly sorted: " + checkIfCorrect(daArray));
-        System.out.println();
-        System.out.println();
-    }
-    
-    
     
 
 

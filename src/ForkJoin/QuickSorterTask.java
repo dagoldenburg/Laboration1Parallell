@@ -17,12 +17,22 @@ public class QuickSorterTask extends RecursiveAction{
 
     private float[] array;
     private int low,high;
+    private int threshold;
 
+    public QuickSorterTask(int low, int high,float[] array,int threshold) {
+        this.array = array;
+        this.low = low;
+        this.high = high;
+        this.threshold = threshold;
+    }
+
+    /*
     public QuickSorterTask(int low, int high,float[] array) {
         this.array = array;
         this.low = low;
         this.high = high;
-    }
+        this.threshold = threshold;
+    }*/
 
   //  public static void setArray(float[] array) {
   //      QuickSorterTask.array = array;
@@ -52,7 +62,7 @@ public class QuickSorterTask extends RecursiveAction{
 
 
         /** if subarray is less than x elements then dont fork just compute **/
-        if((high-low) < 5000) {
+        if((high-low) < threshold) {
             if(low < j){
                 quicksort(low, j);
             }
@@ -61,8 +71,8 @@ public class QuickSorterTask extends RecursiveAction{
             }
         }else{ //fork to new tasks
             boolean fork = false;
-            QuickSorterTask worker1 = new QuickSorterTask(low, j,array);
-            QuickSorterTask worker2 = new QuickSorterTask(i, high,array);
+            QuickSorterTask worker1 = new QuickSorterTask(low, j,array,threshold);
+            QuickSorterTask worker2 = new QuickSorterTask(i, high,array,threshold);
             if (low < j) {
                 worker1.fork();
                 fork = true;
